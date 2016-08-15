@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user -->
+<!-- -->
+<!-- For professional support please see -->
+<!-- http://www.qos.ch/shop/products/professionalSupport -->
+<!-- -->
+<configuration scan="true" scanPeriod="30 seconds">
+
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <!-- <encoder> <pattern>%d{yyyy-MM-dd HH:mm:ssS} %5p [%c@%t]:%L - %m%n</pattern>
+            </encoder> -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ssS} %5p [%c{5}#%M]:%L-%m%n%caller{0}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="endpoint.statistics.logfile" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>/tmp/endpoint.statistics.log</file>
+        <append>true</append>
+        <prudent>false</prudent>
+        <encoder>
+            <charset>UTF-8</charset>
+            <pattern>%m%n</pattern>
+        </encoder>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>/tmp/endpoint.statistics.%d{yyyy-MM-dd-HH}.log.gz</fileNamePattern>
+            <maxHistory>720</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="stdout"/>
+    </root>
+
+    <logger name="com.baidu" level="debug"/>
+
+    <!-- <logger service="org.springframework" level="debug" /> -->
+    <!--<logger service="org.eclipse.jetty" level="debug"/>-->
+</configuration>

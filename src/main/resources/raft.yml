@@ -1,0 +1,6 @@
+---
+  workDir: /tmp/raft
+  seeds:
+      - {id: 1, host: "0.0.0.0", port: 6001}
+      - {id: 2, host: "0.0.0.0", port: 6002}
+      - {id: 3, host: "0.0.0.0", port: 6003}
